@@ -1,8 +1,9 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
+import logo from "./customlogo.png";
 import './App.css';
 import React, { useState, useEffect } from "react";
 import Uwuifier from "uwuifier";
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Spinner } from 'reactstrap';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 const currencies = [
@@ -63,6 +64,9 @@ function App() {
   if (currencyReady) {
     return (
       <div>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+          <img src={logo} alt="" className="site-name"/>
+        </a>
         <div className="of-container">
           {data.map(item => (
             <div key={item.id}>
@@ -89,7 +93,12 @@ function App() {
     );
   }
   else {
-    return <h1>Loading...</h1>
+    return (
+      <div>
+        <h1>Loading...</h1>
+        
+      </div>
+    );
   }
   
 }

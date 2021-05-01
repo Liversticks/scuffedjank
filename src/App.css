@@ -3,6 +3,10 @@
   max-width: 100%;
 }
 
+.site-name {
+  max-width: 400px;
+}
+
 .box {
   border-radius: 6px;
   border: 2px solid grey;
