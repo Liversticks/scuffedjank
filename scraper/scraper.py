@@ -1,12 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = 'https://www.bestbuy.ca/en-ca/category/fans/26541'
+URL = 'https://www.google.com/search?q=fan&tbm=shop'
 page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
-results = soup.find(id='ResultsContainer')
+print(soup)
 
-print(results)
-print("It works")
+#results = soup.find(id='ResultsContainer')
+
+#print(results)
+#print("It works")
+
+k=input("press close to exit")
