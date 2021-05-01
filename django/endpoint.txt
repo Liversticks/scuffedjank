@@ -1,0 +1,14 @@
+format:
+
+
+
+
+http://127.0.0.1:8000/results/fan
+{ 
+    "product_name": "fan", 
+    "data": [
+        "fan1", 
+        "fan2", 
+        "fan3"
+    ] 
+}
