@@ -7,9 +7,12 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 
 const currencies = [
   "USD",
-  "EUR",
   "GBP",
-  "JPY"
+  "JPY",
+  "CHF",
+  "CNY",
+  "ZAR",
+  "MXN"
 ]
 
 const APIKEY = "b0e918fb6aba705171ea148727f821b9";
@@ -19,9 +22,14 @@ const APIKEY = "b0e918fb6aba705171ea148727f821b9";
 // Assume all prices come in as CAD
 function App() {
   const [data, setData] = useState([]);
-  const [currency, setCurrency] = useState("");
+  const [currency, setCurrency] = useState();
   const [rate, setRate] = useState(1);
+  const [currencyReady, setCurrencyReady] = useState(false);
   
+  useEffect(() => {
+    setCurrency(currencies[Math.floor(Math.random() * currencies.length)]);
+  }, [])
+
   useEffect(() => {
     async function fetchData() {
       const result = await fetch("https://fakestoreapi.com/products");
@@ -31,53 +39,59 @@ function App() {
     }
 
     fetchData();
+    
   }, []);
 
   useEffect(() => {
+    
     async function fetchCurrency() {
-      setCurrency(currencies[Math.floor(Math.random() * currencies.length)]);
       const url = `http://api.exchangeratesapi.io/v1/latest?access_key=${APIKEY}&symbols=CAD,${currency}`;
       const rateObj = await fetch(url);
       const rateRes = await rateObj.json();
       console.log(rateRes)
-      setRate(rateRes.rates[currency]/rateRes.rates["CAD"]);
-      
+      setRate((rateRes.rates.hasOwnProperty(currency) ? rateRes.rates[currency] : 1)/rateRes.rates["CAD"]);
+      setCurrencyReady(true);      
     }
+    
     fetchCurrency();
     
   }, [currency]);
 
-
   const uwuifier = new Uwuifier();
   const symbol = getSymbolFromCurrency(currency);
 
-
-  return (
-    <div>
-      <div className="of-container">
-        {data.map(item => (
-          <div key={item.id}>
-            <Card className="box">
-              <CardBody>
-                <CardTitle tag="h2">{uwuifier.uwuifySentence(item.title)}</CardTitle>
-                <CardSubtitle tag="h3" className="text-muted">{symbol} {Number.parseFloat(item.price * rate).toFixed(2)}</CardSubtitle>
-              </CardBody>
-              <CardImg 
-                src={item.image}
-                alt={item.title + "bruh moment"}
-                top width="100%"  
-              />
-              { /*
-              <CardBody>
-                <CardText>{uwuifier.uwuifySentence(item.description)}</CardText>
-              </CardBody>
-              */ }
-            </Card>             
-          </div>
-        ))}
+  if (currencyReady) {
+    return (
+      <div>
+        <div className="of-container">
+          {data.map(item => (
+            <div key={item.id}>
+              <Card className="box">
+                <CardBody>
+                  <CardTitle tag="h2">{uwuifier.uwuifySentence(item.title)}</CardTitle>
+                  <CardSubtitle tag="h3" className="text-muted">{symbol} {Number.parseFloat(item.price * rate).toFixed(2)}</CardSubtitle>
+                </CardBody>
+                <CardImg 
+                  src={item.image}
+                  alt={item.title + "bruh moment"}
+                  top width="100%"  
+                />
+                { /*
+                <CardBody>
+                  <CardText>{uwuifier.uwuifySentence(item.description)}</CardText>
+                </CardBody>
+                */ }
+              </Card>             
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  else {
+    return <h1>Loading...</h1>
+  }
+  
 }
 
 export default App;
