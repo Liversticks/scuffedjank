@@ -1,28 +1,16 @@
 .productImg {
   border-radius: 6px;
   max-width: 100%;
-  grid-row-start: 3;
-  grid-row-end: 4;
-}
-
-.itemHeader {
-  grid-row-start: 1;
-  grid-row-end: 2;
-}
-
-.description {
-  grid-row-start: 2;
-  grid-row-end: 3;
 }
 
 .box {
-  align-items: flex-start;
   border-radius: 6px;
   border: 2px solid grey;
-  width: 600px;
-  display: grid;
-  grid-template-rows: 50px auto 50%;
-  grid-template-columns: 100%;
+  margin-top: 2rem;
+}
+
+.of-container {
+  width: 400px;
 }
 
 .App {
