@@ -62,7 +62,7 @@ function App() {
 
   if (currencyReady) {
     return (
-      <div>
+      <div className="rootwrap">
         <div className="of-container">
           {data.map(item => (
             <div key={item.id}>
