@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from "react";
+import Uwuifier from "uwuifier";
 
 // Get data from API
 // Render
@@ -16,7 +17,8 @@ function App() {
 
     fetchData();
   }, [])
-  
+  const uwuifier = new Uwuifier();
+
   return (
     <div className="App">
       <header className="App-header">
@@ -35,10 +37,20 @@ function App() {
       </header>
       <div>
         {data.map(item => (
-          <div key={item.id}>
-              <div>{item.title} {item.price}</div>
-              <img src={item.image} alt={item.title + "bruh moment"}></img>
-              <div>{item.description}</div>
+          <div key={item.id} className="box">
+              <div className="itemHeader">
+                <div>{item.title}</div>
+                <div>{item.price}</div>
+              </div>
+              <div className="description">
+                {uwuifier.uwuifySentence(item.description)}
+              </div>
+              <img 
+                src={item.image}
+                alt={item.title + "bruh moment"}
+                className="productImg"  
+              ></img>
+              
           </div>
         ))}
       </div>
