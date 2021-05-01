@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.http import JsonResponse
+import scraper
 # Create your views here.
 
 
@@ -11,8 +12,9 @@ def getItem(request, product_name):
 
     # get returned data, put it inside of data list
 
+    returneddata = scraper.getFromURL(product_name)
     data = {
         "product_name": product_name,
-        "data": [ f"{product_name}1", f"{product_name}2", f"{product_name}3" ]
+        "data": returneddata
     }
     return JsonResponse(data)
