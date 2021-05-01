@@ -12,6 +12,7 @@ def getItem(request, product_name):
     # get returned data, put it inside of data list
 
     data = {
-        "data": [ product_name ]
+        "product_name": product_name,
+        "data": [ f"{product_name}1", f"{product_name}2", f"{product_name}3" ]
     }
     return JsonResponse(data)
