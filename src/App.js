@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import Uwuifier from "uwuifier";
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Spinner } from 'reactstrap';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import { useForm } from 'react-hook-form';
+import Search from "./search.js"
 
 const currencies = [
   "USD",
@@ -26,6 +28,16 @@ function App() {
   const [currency, setCurrency] = useState();
   const [rate, setRate] = useState(1);
   const [currencyReady, setCurrencyReady] = useState(false);
+  const [query, setQuery] = useState("fan");
+
+  const { register, handleSubmit, watch, formState: {errors}} = useForm();
+  const onSubmit = async data => {
+    console.log(data.exampleRequired);
+    setQuery(data.exampleRequired);
+    const result = await fetch(`http://localhost:8000/results/${data.exampleRequired}`);
+    const jsonRes = await result.json();
+    setData(jsonRes.data);
+  };
   
   useEffect(() => {
     setCurrency(currencies[Math.floor(Math.random() * currencies.length)]);
@@ -65,10 +77,16 @@ function App() {
 
   if (currencyReady) {
     return (
-      <div className="rootwrap">
+      <div className="rootwrap">        
         <img src={logo} alt="title" className="logo"/>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register("exampleRequired", {required: true})} />
+            {errors.exampleRequired && <span>Search for something!</span>}
+            <input type="submit"/>
+        </form>
         <div className="of-container">
-          {data.map(item => (
+          {data.length == 0 ? uwuifier.uwuifySentence(`Sorry! We couldn't find anything matching ${query}.`) : 
+          data.map(item => (
             <div>
               <Card className="box">
                 <CardBody>
@@ -87,7 +105,10 @@ function App() {
                 */ }
               </Card>             
             </div>
-          ))}
+          ))
+          
+          }
+
         </div>
       </div>
     );
