@@ -33,7 +33,8 @@ function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await fetch("https://fakestoreapi.com/products");
+      //const result = await fetch("https://fakestoreapi.com/products");
+      const result = await fetch("http://localhost:8000/results/bruh");
       const jsonRes = await result.json();
       console.log(jsonRes);
       setData(jsonRes);
