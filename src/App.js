@@ -81,7 +81,7 @@ function App() {
         <img src={logo} alt="title" className="logo"/>
         <form onSubmit={handleSubmit(onSubmit)}>
             <input {...register("exampleRequired", {required: true})} />
-            {errors.exampleRequired && <span>Search for something!</span>}
+            
             <input type="submit"/>
         </form>
         <div className="of-container">
