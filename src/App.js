@@ -63,10 +63,7 @@ function App() {
 
   if (currencyReady) {
     return (
-      <div>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-          <img src={logo} alt="" className="site-name"/>
-        </a>
+      <div className="rootwrap">
         <div className="of-container">
           {data.map(item => (
             <div key={item.id}>
