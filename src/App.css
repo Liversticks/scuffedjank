@@ -22,7 +22,8 @@
   justify-content: space-evenly;
 }
 .of-container > div {
-  width: 400px;
+  width: 200px;
+  margin: 50px;
 }
 
 .App {
