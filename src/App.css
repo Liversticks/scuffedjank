@@ -47,3 +47,8 @@
 .rootwrap {
   padding: 10px;
 }
+
+.logo {
+  height: auto;
+  width: 30%;
+}

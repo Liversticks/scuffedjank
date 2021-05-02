@@ -66,6 +66,7 @@ function App() {
   if (currencyReady) {
     return (
       <div className="rootwrap">
+        <img src={logo} alt="title" className="logo"/>
         <div className="of-container">
           {data.map(item => (
             <div>
