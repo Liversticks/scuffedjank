@@ -27,8 +27,13 @@ def getFromURL(thingtosearch):
     productPricesList = []
     productPrices = soup.find_all("span", attrs={"class": "HRLxBb"})
     for i in productPrices:
-        j = i.text
-        j = float(j.replace("$", ""))
+        j = i.text.lower()
+        alphabet_string = 'abcdefghijklmnopqrstuvwxyz'
+        alphabet_list = list(alphabet_string)
+
+        for alpha in alphabet_list:
+            j = j.replace(alpha, "")
+        j = float(j.replace("$", "").replace(",", "").replace("/", "").replace(" ", ""))
 
         productPricesList.append(j)
         #print(i)

@@ -34,10 +34,11 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       //const result = await fetch("https://fakestoreapi.com/products");
-      const result = await fetch("http://localhost:8000/results/bruh");
+      const result = await fetch("http://localhost:8000/results/fan");
       const jsonRes = await result.json();
       console.log(jsonRes);
-      setData(jsonRes);
+      console.log(jsonRes['data']);
+      setData(jsonRes['data']);
     }
 
     fetchData();
@@ -67,15 +68,15 @@ function App() {
       <div className="rootwrap">
         <div className="of-container">
           {data.map(item => (
-            <div key={item.id}>
+            <div>
               <Card className="box">
                 <CardBody>
-                  <CardTitle tag="h2">{uwuifier.uwuifySentence(item.title)}</CardTitle>
+                  <CardTitle tag="h2">{uwuifier.uwuifySentence(item.name)}</CardTitle>
                   <CardSubtitle tag="h3" className="text-muted">{symbol} {Number.parseFloat(item.price * rate).toFixed(2)}</CardSubtitle>
                 </CardBody>
                 <CardImg 
                   src={item.image}
-                  alt={item.title + "bruh moment"}
+                  alt={item.name + "bruh moment"}
                   top width="100%"  
                 />
                 { /*
