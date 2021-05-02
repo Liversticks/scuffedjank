@@ -48,12 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-<<<<<<< HEAD
     'corsheaders.middleware.CorsMiddleware',
-=======
-    'corsheader.middleware.CorsMiddleware',
->>>>>>> master
 ]
+
 
 ROOT_URLCONF = 'mysite.urls'
 
